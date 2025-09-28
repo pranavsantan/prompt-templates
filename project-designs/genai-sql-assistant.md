@@ -54,7 +54,17 @@ This project aims to build a Generative AI assistant that empowers non-SQL analy
 - **Integration:**  
   - Connects with Databricks SQL endpoints.  
   - Pulls schema metadata from Unity Catalog.  
-  - Generates dashboards in Databricks SQL.  
+  - Generates dashboards in Databricks SQL.
+ 
+### 4.1 Structured Prompt Template  
+Before a user query enters the RAG flow, it is normalized into a structured prompt format. This ensures consistent inputs for the model and reduces ambiguity.  
+
+**Prompt Template Fields:**  
+- **User Query:** Natural language request from the analyst.  
+- **Context:** Relevant schema, business glossary, and query examples retrieved from vector search.  
+- **Task Instruction:** Explicit instruction for GPT-5 (e.g., *"Generate a SQL query only. Do not include explanations or modifications outside of the SQL block."*).  
+- **Constraints:** Governance rules (e.g., enforce RBAC, prevent destructive SQL).  
+- **Output Format:** JSON response with `sql_query`, `explanation`, and `visualization_suggestion`.  
 
 ---
 
